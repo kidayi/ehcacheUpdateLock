@@ -5,8 +5,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-public class CacheReloadLock {
-	private Logger logger=Logger.getLogger(CacheReloadLock.class);
+public class CacheUpdateLock {
+	private Logger logger=Logger.getLogger(CacheUpdateLock.class);
 	
 	private ReentrantLock lock=new ReentrantLock();
 	

@@ -18,7 +18,7 @@ public class CacheComponent{
 	private Logger logger=Logger.getLogger(CacheComponent.class);
 	private CacheManager cacheManager;
 	private Cache cache;
-	private CacheReloadLockManager reloadLockManager=new CacheReloadLockManager();
+	private CacheUpdateLockManager reloadLockManager=new CacheUpdateLockManager();
 	
 	public CacheComponent(String configAllPath,String cacheName){
 		this.cacheManager=CacheManager.newInstance(configAllPath);
@@ -107,7 +107,7 @@ public class CacheComponent{
 	
 	public <T> T refresh(String cachekey,CacheRefreshRunnable cacheRefreshRunnable,
 			long lockTimeoutMilliseconds,Class<T> valueType){
-		CacheReloadLock lock=null;
+		CacheUpdateLock lock=null;
 		try{
 			lock=reloadLockManager.getLock(cachekey);
 			if(lock.tryLock(lockTimeoutMilliseconds,TimeUnit.MILLISECONDS)){
@@ -139,7 +139,7 @@ public class CacheComponent{
 	
 	public <T> Map<String,T> refreshBatch(Set<String> noValueKeySet,CacheRefreshBatchRunnable cacheRefreshListRunnable,
 			long lockTimeoutMilliseconds,Class<T> valueType){
-		CacheReloadLock lock=null;
+		CacheUpdateLock lock=null;
 		try{
 			lock=reloadLockManager.getLock(noValueKeySet);
 			if(lock.tryLock(lockTimeoutMilliseconds,TimeUnit.MILLISECONDS)){

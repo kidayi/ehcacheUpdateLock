@@ -5,15 +5,15 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-public class CacheReloadLockManager {
-	private Logger logger=Logger.getLogger(CacheReloadLockManager.class);
+public class CacheUpdateLockManager {
+	private Logger logger=Logger.getLogger(CacheUpdateLockManager.class);
 	
-	private Map<Object,CacheReloadLock> lockMap=new HashMap<Object, CacheReloadLock>();
+	private Map<Object,CacheUpdateLock> lockMap=new HashMap<Object, CacheUpdateLock>();
 	
-	public synchronized CacheReloadLock getLock(Object key){
-		CacheReloadLock lock=lockMap.get(key);
+	public synchronized CacheUpdateLock getLock(Object key){
+		CacheUpdateLock lock=lockMap.get(key);
 		if(lock==null){
-			lock=new CacheReloadLock();
+			lock=new CacheUpdateLock();
 			lockMap.put(key, lock);
 		}else{
 			lock.incrementUserCount();
@@ -22,7 +22,7 @@ public class CacheReloadLockManager {
 	}
 	
 	public synchronized void releaseLock(Object key){
-		CacheReloadLock lock=lockMap.get(key);
+		CacheUpdateLock lock=lockMap.get(key);
 		if(lock!=null){
 			int useCount=lock.decrementUserCount();
 			if(useCount<1){
