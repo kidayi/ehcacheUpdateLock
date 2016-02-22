@@ -14,13 +14,13 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.log4j.Logger;
 
-public class ApartmentCache{
-	private Logger logger=Logger.getLogger(ApartmentCache.class);
+public class CacheComponent{
+	private Logger logger=Logger.getLogger(CacheComponent.class);
 	private CacheManager cacheManager;
 	private Cache cache;
-	private ApartmentCacheReloadLockManager reloadLockManager=new ApartmentCacheReloadLockManager();
+	private CacheReloadLockManager reloadLockManager=new CacheReloadLockManager();
 	
-	public ApartmentCache(String configAllPath,String cacheName){
+	public CacheComponent(String configAllPath,String cacheName){
 		this.cacheManager=CacheManager.newInstance(configAllPath);
 		this.cache=cacheManager.getCache(cacheName);
 		if(this.cache==null){
@@ -29,7 +29,7 @@ public class ApartmentCache{
 		}
 	}
 	
-	public ApartmentCache(String cacheName){
+	public CacheComponent(String cacheName){
 		String configPath=ClassLoader.getSystemResource("conf/custom/env/ehcache.xml").getPath();
 		this.cacheManager=CacheManager.newInstance(configPath);
 		this.cache=cacheManager.getCache(cacheName);

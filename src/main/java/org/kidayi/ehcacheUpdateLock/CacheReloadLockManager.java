@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-public class ApartmentCacheReloadLockManager {
-	private Logger logger=Logger.getLogger(ApartmentCacheReloadLockManager.class);
+public class CacheReloadLockManager {
+	private Logger logger=Logger.getLogger(CacheReloadLockManager.class);
 	
 	private Map<Object,CacheReloadLock> lockMap=new HashMap<Object, CacheReloadLock>();
 	
